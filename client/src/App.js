@@ -1,5 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Navbar from './components/Navbar';
 import Search from "./components/Search";
 import Saved from "./components/Saved";
 
@@ -8,23 +10,30 @@ function App() {
   let authors = ["J.R.R. Tolkein"];
   let book = {
     title: "Fellowship of the Ring",
-    authors, 
+    authors,
     description,
-    image: "https://via.placeholder.com/150", 
+    image: "https://via.placeholder.com/150",
     link: "/somelink",
   }
   let books = [book];
   return (
-    <div className="App">
+    <Router>
+      <Navbar />
       <div className="container">
         <header className="mt-3">
           <h1>Google Books Search</h1>
           <h5>Search for and Save Books of Interest</h5>
         </header>
-        <Search />
-        <Saved books={books} />
+        <Switch>
+          <Route exact path="/">
+            <Search />
+          </Route>
+          <Route exact path="/saved">
+            <Saved books={books} />
+          </Route>
+        </Switch>
       </div>
-    </div>
+    </Router>
   );
 }
 
