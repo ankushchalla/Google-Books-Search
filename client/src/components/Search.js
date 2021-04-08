@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 function Search() {
-    const [search, searchState] = useState('');
-
     function searchBook(event) {
         let input = document.getElementById('search').value;
         console.log("value:", input);
@@ -10,7 +8,7 @@ function Search() {
 
     return (
         <>
-            <div class="input-group mb-3">
+            <div className="input-group mb-3">
                 <input
                     type="text" className="form-control"
                     placeholder="Search by title." aria-label="Recipient's username" aria-describedby="button-addon2"

@@ -1,17 +1,17 @@
 import React from 'react';
 import Book from './Book';
 
-function Saved(props) {
-    let books = props.books;
+function Saved({ books, deleteBook }) {
     return (
         <div className="books">
             {books.map(book => {
                 return <Book 
                 title={book.title}
-                authors={book.authors}
+                author={book.author}
                 description={book.description}
                 image={book.image}
                 link={book.link}
+                deleteBook={deleteBook}
                 key={book.title}
                 />
             })}

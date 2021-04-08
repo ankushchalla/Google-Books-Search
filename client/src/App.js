@@ -1,21 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from './components/Navbar';
 import Search from "./components/Search";
 import Saved from "./components/Saved";
+import API from './utils/API';
 
 function App() {
-  let description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  let authors = ["J.R.R. Tolkein"];
-  let book = {
-    title: "Fellowship of the Ring",
-    authors,
-    description,
-    image: "https://via.placeholder.com/150",
-    link: "/somelink",
+  let [library, setLibrary] = useState([])
+  useEffect(() => {
+    API.getAllBooks().then(dbLibrary => {
+      setLibrary(dbLibrary.data);
+    })
+  }, [])
+
+  const deleteBook = (title) => {
+    API.deleteBook(title);
+    const newLibrary = library.filter(book => book.title != title);
+    setLibrary(newLibrary)
   }
-  let books = [book];
+
   return (
     <Router>
       <Navbar />
@@ -29,7 +33,7 @@ function App() {
             <Search />
           </Route>
           <Route exact path="/saved">
-            <Saved books={books} />
+            <Saved books={library} deleteBook={deleteBook} />
           </Route>
         </Switch>
       </div>
