@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Book({ title, author, description, image, link, deleteBook }) {
+function Book({ title, author, description, image, link, deleteBook, saveBook }) {
     return (
         <div className="row">
             <div className="book card">
@@ -13,7 +13,13 @@ function Book({ title, author, description, image, link, deleteBook }) {
                     <div className="col-9 card-body">
                         <p className="card-text">{description}</p>
                         <a href={link} target='_blank' rel="noreferrer" className="btn btn-outline-primary">View</a>
-                        <a onClick={() => deleteBook(title)} className="btn ml-2 btn-outline-danger">Delete</a>
+                        {
+                            saveBook != null ?
+                                <a onClick={(e) => saveBook(e)} className="btn ml-2 btn-outline-success">Save</a>
+                                :
+                                <a onClick={() => deleteBook(title)} className="btn ml-2 btn-outline-danger">Delete</a>
+                        }
+
                     </div>
                 </div>
 

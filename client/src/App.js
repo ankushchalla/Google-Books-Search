@@ -8,6 +8,7 @@ import API from './utils/API';
 
 function App() {
   let [library, setLibrary] = useState([])
+
   useEffect(() => {
     API.getAllBooks().then(dbLibrary => {
       setLibrary(dbLibrary.data);
@@ -16,7 +17,7 @@ function App() {
 
   const deleteBook = (title) => {
     API.deleteBook(title);
-    const newLibrary = library.filter(book => book.title != title);
+    const newLibrary = library.filter(book => book.title !== title);
     setLibrary(newLibrary)
   }
 
