@@ -3,6 +3,7 @@ import Book from './Book';
 
 function Saved({ books, deleteBook }) {
     return (
+        <>
         <div className="books">
             {books.map(book => {
                 return <Book 
@@ -16,6 +17,8 @@ function Saved({ books, deleteBook }) {
                 />
             })}
         </div>
+        <h4 className="mt-2">Some books not displaying? Try reloading the page.</h4>
+        </>
     )
 }
 
